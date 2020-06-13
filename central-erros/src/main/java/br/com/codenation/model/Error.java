@@ -1,17 +1,21 @@
 package br.com.codenation.model;
 
+import java.util.Date;
+import java.util.UUID;
+
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.Id;
+import javax.persistence.ManyToOne;
+
+import org.hibernate.annotations.GenericGenerator;
+
 import br.com.codenation.commons.EnvironmentEnum;
 import br.com.codenation.commons.LevelEnum;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
-import org.hibernate.annotations.GenericGenerator;
-import org.springframework.validation.annotation.Validated;
-
-import javax.persistence.*;
-import java.util.Date;
-import java.util.UUID;
 
 @Data
 @Builder
