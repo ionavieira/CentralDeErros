@@ -1,5 +1,7 @@
 package br.com.codenation.model;
 
+import br.com.codenation.commons.EnvironmentEnum;
+import br.com.codenation.commons.LevelEnum;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
@@ -7,9 +9,7 @@ import lombok.NoArgsConstructor;
 import org.hibernate.annotations.GenericGenerator;
 import org.springframework.validation.annotation.Validated;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.Id;
+import javax.persistence.*;
 import java.util.Date;
 import java.util.UUID;
 
@@ -33,9 +33,12 @@ public class Error {
 
     private String origin;
 
-//    private LevelEnum level;
+    private LevelEnum level;
 
     private Date date;
 
-//    private User user;
+    private EnvironmentEnum environment;
+
+    @ManyToOne
+    private User user;
 }

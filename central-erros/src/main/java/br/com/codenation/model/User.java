@@ -10,8 +10,10 @@ import org.springframework.validation.annotation.Validated;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
+import javax.persistence.OneToMany;
 import javax.validation.constraints.NotNull;
 import java.util.Date;
+import java.util.List;
 import java.util.UUID;
 
 
@@ -37,6 +39,9 @@ public class User {
     private String token;
 
     private Boolean active;
+
+    @OneToMany(mappedBy = "user")
+    private List<Error> errors;
 
 
 
