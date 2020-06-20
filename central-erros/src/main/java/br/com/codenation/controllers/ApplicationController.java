@@ -1,17 +1,22 @@
 package br.com.codenation.controllers;
 
-import lombok.AllArgsConstructor;
-import org.springframework.web.bind.annotation.GetMapping;
+import br.com.codenation.model.Application;
+import br.com.codenation.service.ApplicationService;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-@RestController
-@AllArgsConstructor
-@RequestMapping("/application")
-public class ApplicationController {
+import java.util.UUID;
 
-    @GetMapping
-    public String test(){
-        return "Application Works!";
+@RestController
+@RequestMapping("/application")
+public class ApplicationController extends AbstractController<Application, UUID> {
+
+    private ApplicationService applicationService;
+
+    @Autowired
+    public ApplicationController(ApplicationService service) {
+        super(service);
+        this.applicationService = service;
     }
 }

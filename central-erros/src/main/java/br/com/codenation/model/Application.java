@@ -7,6 +7,7 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.validation.constraints.NotNull;
 
+import br.com.codenation.model.interfaces.IModel;
 import org.hibernate.annotations.GenericGenerator;
 
 import lombok.AllArgsConstructor;
@@ -19,7 +20,7 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 @AllArgsConstructor
 @Entity(name = "application")
-public class Application {
+public class Application implements IModel<UUID> {
 
     @Id
     @GeneratedValue(generator = "uuid2")

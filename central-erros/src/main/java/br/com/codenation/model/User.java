@@ -9,6 +9,8 @@ import javax.persistence.Id;
 import javax.persistence.OneToMany;
 import javax.validation.constraints.NotNull;
 
+import br.com.codenation.model.interfaces.IModel;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import org.hibernate.annotations.GenericGenerator;
 
 import lombok.AllArgsConstructor;
@@ -22,7 +24,7 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 @AllArgsConstructor
 @Entity(name = "usuario")
-public class User {
+public class User implements IModel<UUID> {
 
     @Id
     @GeneratedValue(generator = "uuid2")
@@ -40,6 +42,7 @@ public class User {
 
     private Boolean active;
 
+    @JsonIgnore
     @OneToMany(mappedBy = "user")
     private List<Error> errors;
 
