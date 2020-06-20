@@ -8,6 +8,7 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.ManyToOne;
 
+import br.com.codenation.model.interfaces.IModel;
 import org.hibernate.annotations.GenericGenerator;
 
 import br.com.codenation.commons.EnvironmentEnum;
@@ -22,7 +23,7 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 @AllArgsConstructor
 @Entity(name = "error")
-public class Error {
+public class Error implements IModel {
 
     @Id
     @GeneratedValue(generator = "uuid2")
