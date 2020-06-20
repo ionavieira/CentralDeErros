@@ -70,8 +70,5 @@ public abstract class AbstractService<MODEL extends IModel, ID> {
         repository.deleteAllInBatch();
     }
 
-    public MODEL getOne(ID id){
-        return repository.getOne(id);
-    }
 
 }

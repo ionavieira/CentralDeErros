@@ -20,7 +20,7 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 @AllArgsConstructor
 @Entity(name = "application")
-public class Application implements IModel {
+public class Application implements IModel<UUID> {
 
     @Id
     @GeneratedValue(generator = "uuid2")

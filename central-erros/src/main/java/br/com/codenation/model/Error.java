@@ -23,7 +23,7 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 @AllArgsConstructor
 @Entity(name = "error")
-public class Error implements IModel {
+public class Error implements IModel<UUID> {
 
     @Id
     @GeneratedValue(generator = "uuid2")
