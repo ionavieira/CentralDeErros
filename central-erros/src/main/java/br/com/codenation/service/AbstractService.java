@@ -2,6 +2,7 @@ package br.com.codenation.service;
 
 import br.com.codenation.model.interfaces.IModel;
 import lombok.AllArgsConstructor;
+import org.springframework.data.domain.Sort;
 import org.springframework.data.jpa.repository.JpaRepository;
 
 import java.util.List;
@@ -40,4 +41,37 @@ public abstract class AbstractService<MODEL extends IModel, ID> {
         repository.deleteById(id);
 
     }
+
+    public List<MODEL> findAll(Sort sort){
+        return repository.findAll(sort);
+    }
+
+    public List<MODEL> findAllById(Iterable<ID> ids){
+        return repository.findAllById(ids);
+    }
+
+    public List<MODEL> saveAll(Iterable<MODEL> models){
+        return repository.saveAll(models);
+    }
+
+    public void flush(){
+        repository.flush();
+    }
+
+    public MODEL saveAndFlush(MODEL model){
+        return repository.saveAndFlush(model);
+    }
+
+    public void deleteInBatch(Iterable<MODEL> models){
+        repository.deleteInBatch(models);
+    }
+
+    public void deleteAllInBatch() {
+        repository.deleteAllInBatch();
+    }
+
+    public MODEL getOne(ID id){
+        return repository.getOne(id);
+    }
+
 }
