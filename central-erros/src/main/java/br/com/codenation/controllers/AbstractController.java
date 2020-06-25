@@ -14,12 +14,12 @@ public abstract class AbstractController<MODEL extends IModel, ID> {
 
     private AbstractService<MODEL, ID> service;
 
-    @GetMapping
-    @ResponseStatus(HttpStatus.OK)
-    @ApiOperation(value = "Lista todas os models")
-    public List<MODEL> listAll() {
-        return service.findAll();
-    }
+//    @GetMapping
+//    @ResponseStatus(HttpStatus.OK)
+//    @ApiOperation(value = "Lista todas os models")
+//    public List<MODEL> listAll() {
+//        return service.findAll();
+//    }
 
     @GetMapping("/{id}")
     @ResponseStatus(HttpStatus.OK)
