@@ -1,6 +1,5 @@
 package br.com.codenation.controllers;
 
-import br.com.codenation.model.Application;
 import br.com.codenation.model.Error;
 import br.com.codenation.service.ErrorService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -27,7 +26,7 @@ public class ErrorController extends AbstractController<Error, UUID>{
         this.errorService = errorService;
     }
 
-    @GetMapping 
+    @GetMapping("/filter")
     @ResponseStatus(HttpStatus.OK)
     public List<Error> listFilters(@RequestParam(required = false) Map<Class<?>, Class<?>> params) {
     	return errorService.findWithFilters(params);
