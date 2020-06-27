@@ -26,7 +26,7 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 @AllArgsConstructor
 @Entity(name = "users")
-public class User implements IModel<UUID> {
+public class User extends AbstractAuditingEntity implements IModel<UUID> {
 
 	@Id
 	@GeneratedValue(generator = "uuid2")

@@ -26,7 +26,7 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 @AllArgsConstructor
 @Entity(name = "log")
-public class Error implements IModel<UUID> {
+public class Error extends AbstractAuditingEntity implements IModel<UUID> {
 
 	@Id
 	@GeneratedValue(generator = "uuid2")
