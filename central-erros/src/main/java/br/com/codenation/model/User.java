@@ -7,45 +7,50 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.OneToMany;
+import javax.validation.constraints.Email;
 import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Size;
 
-import br.com.codenation.model.interfaces.IModel;
-import com.fasterxml.jackson.annotation.JsonIgnore;
 import org.hibernate.annotations.GenericGenerator;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
+import br.com.codenation.model.interfaces.IModel;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
-
 @Data
 @Builder
 @NoArgsConstructor
 @AllArgsConstructor
-@Entity(name = "usuario")
+@Entity(name = "users")
 public class User implements IModel<UUID> {
 
-    @Id
-    @GeneratedValue(generator = "uuid2")
-    @GenericGenerator(name = "uuid2", strategy = "uuid2")
-    private UUID id;
+	@Id
+	@GeneratedValue(generator = "uuid2")
+	@GenericGenerator(name = "uuid2", strategy = "uuid2")
+	private UUID id;
 
-    @NotNull
-    private String name;
+	@NotNull
+	@Size(min = 3)
+	private String name;
 
-    private String email;
+	@Email
+	@NotNull
+	private String email;
 
-    private String password;
+	@NotNull
+	private String password;
 
-    private String token;
+	private String token;
 
-    private Boolean active;
+	@Builder.Default
+	private Boolean active = true;
 
-    @JsonIgnore
-    @OneToMany(mappedBy = "user")
-    private List<Error> errors;
-
-
+	@JsonIgnore
+	@OneToMany(mappedBy = "user")
+	private List<Error> errors;
 
 }
