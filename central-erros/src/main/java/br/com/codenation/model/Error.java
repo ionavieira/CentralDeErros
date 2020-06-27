@@ -46,8 +46,6 @@ public class Error extends AbstractAuditingEntity implements IModel<UUID> {
 	@Builder.Default
 	private Boolean archived = false;
 
-	private Date date;
-
 	@ManyToOne
 	private User user;
 
