@@ -32,13 +32,18 @@ public class GenericSpecificationBuilder {
 				
 				while (it.hasNext()) {
 					Entry<String, String> entry = (Entry)it.next();
-					Class<?> klass = root.get(entry.getKey()).getJavaType();
-					
-					if (klass.equals(String.class)) {
-						predicates.add(cb.like(root.get(entry.getKey()), "%"+entry.getValue()+"%"));
-					} else {
-						predicates.add(cb.equal(root.get(entry.getKey()), castParameters(klass, entry.getValue())));
-					}
+						try {
+							Class<?> klass = root.get(entry.getKey()).getJavaType();
+
+							if (klass.equals(String.class)) {
+								predicates.add(cb.like(root.get(entry.getKey()), "%"+entry.getValue()+"%"));
+							} else {
+								predicates.add(cb.equal(root.get(entry.getKey()), castParameters(klass, entry.getValue())));
+							}
+						} catch (Exception e) {
+							// TODO Auto-generated catch block
+							e.printStackTrace();
+						}
 				}
 				
 				return cb.and(predicates.toArray(new Predicate[] {}));

@@ -29,10 +29,4 @@ public class UserController extends AbstractController<User, UUID>{
         super(userService);
         this.userService = userService;
     }
-
-    @GetMapping 
-    @ResponseStatus(HttpStatus.OK)
-    public List<User> listFilters(@RequestParam(required = false) Map<Class<?>, Class<?>> params) {
-    	return userService.findWithFilters(params);
-    }
 }

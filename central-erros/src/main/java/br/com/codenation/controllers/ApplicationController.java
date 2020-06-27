@@ -25,10 +25,4 @@ public class ApplicationController extends AbstractController<Application, UUID>
         super(service);
         this.applicationService = service;
     }
-
-    @GetMapping 
-    @ResponseStatus(HttpStatus.OK)
-    public List<Application> listFilters(@RequestParam(required = false) Map<Class<?>, Class<?>> params) {
-    	return applicationService.findWithFilters(params);
-    }
 }

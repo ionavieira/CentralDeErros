@@ -4,6 +4,10 @@ import br.com.codenation.model.Application;
 import br.com.codenation.model.Error;
 import br.com.codenation.service.ErrorService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
+import org.springframework.data.domain.Sort;
+import org.springframework.data.domain.Sort.Direction;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -27,9 +31,24 @@ public class ErrorController extends AbstractController<Error, UUID>{
         this.errorService = errorService;
     }
 
-    @GetMapping 
+    @GetMapping("/filter") 
     @ResponseStatus(HttpStatus.OK)
-    public List<Error> listFilters(@RequestParam(required = false) Map<Class<?>, Class<?>> params) {
-    	return errorService.findWithFilters(params);
+    public List<Error> listFilters(@RequestParam(required = false) Map<Class<?>, Class<?>> params, 
+    		@RequestParam(
+    				value = "page",
+    				required = false,
+    				defaultValue = "0") int page,
+    		@RequestParam(
+    				value = "size",	
+    				required = false,
+    				defaultValue = "5") int size,
+    		@RequestParam(value = "orderBy", 
+    				defaultValue = "id") String orderBy,
+    		@RequestParam (	
+    				value = "direction",
+    				defaultValue = "asc") String direction) {	    	
+    	PageRequest pageRequest = PageRequest.of(page, size, Direction.fromString(direction), orderBy);	
+    	return errorService.findWithFilters(params, pageRequest);	
     }
 }
+	
