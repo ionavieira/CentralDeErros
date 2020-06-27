@@ -1,12 +1,13 @@
 package br.com.codenation.service;
 
-import br.com.codenation.model.interfaces.IModel;
-import lombok.AllArgsConstructor;
+import java.util.List;
+import java.util.Optional;
+
 import org.springframework.data.domain.Sort;
 import org.springframework.data.jpa.repository.JpaRepository;
 
-import java.util.List;
-import java.util.Optional;
+import br.com.codenation.model.interfaces.IModel;
+import lombok.AllArgsConstructor;
 
 @AllArgsConstructor
 public abstract class AbstractService<MODEL extends IModel, ID> {
