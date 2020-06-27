@@ -27,7 +27,7 @@ public class ErrorController extends AbstractController<Error, UUID>{
         this.errorService = errorService;
     }
 
-    @GetMapping 
+    @GetMapping("/filter")
     @ResponseStatus(HttpStatus.OK)
     public List<Error> listFilters(@RequestParam(required = false) Map<Class<?>, Class<?>> params) {
     	return errorService.findWithFilters(params);

@@ -14,10 +14,20 @@ import br.com.codenation.service.AbstractService;
 import io.swagger.annotations.ApiOperation;
 import lombok.AllArgsConstructor;
 
+import java.util.List;
+
 @AllArgsConstructor
 public abstract class AbstractController<MODEL extends IModel, ID> {
 
     private AbstractService<MODEL, ID> service;
+
+    @GetMapping
+    @ResponseStatus(HttpStatus.OK)
+    @ApiOperation(value = "Lista todas os models")
+    public List<MODEL> listAll() {
+        return service.findAll();
+    }
+
 
     @GetMapping("/{id}")
     @ResponseStatus(HttpStatus.OK)

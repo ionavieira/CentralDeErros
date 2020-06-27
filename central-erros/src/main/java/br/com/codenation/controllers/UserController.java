@@ -30,9 +30,4 @@ public class UserController extends AbstractController<User, UUID>{
         this.userService = userService;
     }
 
-    @GetMapping // verificar se não esta faltando algo nesse mapeamento por se tratar de filtro
-    @ResponseStatus(HttpStatus.OK)
-    public List<User> listFilters(@RequestParam(required = false) Map<Class<?>, Class<?>> params) {
-    	return userService.findWithFilters(params);
-    }
 }
