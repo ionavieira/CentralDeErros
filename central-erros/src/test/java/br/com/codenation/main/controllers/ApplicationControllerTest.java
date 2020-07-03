@@ -1,7 +1,8 @@
 package br.com.codenation.main.controllers;
 
-import static org.hamcrest.Matchers.hasSize;
-import static org.hamcrest.Matchers.is;
+import static org.hamcrest.Matchers.*;
+import static org.hamcrest.MatcherAssert.*;
+
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.jsonPath;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
@@ -38,10 +39,10 @@ public class ApplicationControllerTest {
 	
 	@Test
 	@Transactional
-	public void deveRetornarTodasAsApplications() throws Exception {
-		Application application1 = criarApplication("127.0.0.1");
+	public void shouldReturnEveryApplication() throws Exception {
+		Application application1 = createApplication("127.0.0.1");
 		
-		Application application2 = criarApplication("google.com");
+		Application application2 = createApplication("google.com");
 		
 		
 			ResultActions perform = mvc.perform(get("/application")
@@ -60,7 +61,7 @@ public class ApplicationControllerTest {
 	
 	@Test 
 	@Transactional 
-	public void naoRetornarNenhumaApplication() throws Exception {
+	public void shouldNotReturnAnyApplications() throws Exception {
 		mvc.perform(get("/application")
 				.contentType(MediaType.APPLICATION_JSON_VALUE))
 				.andExpect(status().isOk())
@@ -69,8 +70,8 @@ public class ApplicationControllerTest {
 	
 	@Test
 	@Transactional
-	public void deveRetornarUmaApplicationComIdIgual() throws Exception {
-		Application application = criarApplication("127.0.0.1");
+	public void shouldReturnAnApplicationWithTheSameId() throws Exception {
+		Application application = createApplication("127.0.0.1");
 		
 		ResultActions perform = mvc.perform(get("/application/"+application.getId().toString())
 				.contentType(MediaType.APPLICATION_JSON_VALUE))
@@ -82,7 +83,18 @@ public class ApplicationControllerTest {
 		
 	}
 	
-	private Application criarApplication(String name) {
+	@Test
+	@Transactional
+	public void shouldNotReturnAnyApplicationsBecauseOfInvalidId() throws Exception {
+		Application application = createApplication("google.com");
+		
+		ResultActions perform = mvc.perform(get("/application/" + UUID.randomUUID().toString())
+				.contentType(MediaType.APPLICATION_JSON_VALUE))
+				.andExpect(status().is2xxSuccessful())
+				.andExpect(jsonPath("$").doesNotExist());
+	}
+		
+	private Application createApplication(String name) {
 		Random rand = new Random();
 		Application application = Application.builder()
 				.name(name)

@@ -25,10 +25,10 @@ public class ApplicationServiceTest {
 	
 	@Test 
 	@Transactional
-	public void quandoBuscarTodos() {
-		Application application1 = criarApplication("127.0.0.1");
+	public void whenFindAllApplications() {
+		Application application1 = createApplication("127.0.0.1");
 				
-		Application application2 = criarApplication("189.29.10.2");
+		Application application2 = createApplication("189.29.10.2");
 		
 		List<Application> result = applicationRepository.findAll();
 		
@@ -37,8 +37,8 @@ public class ApplicationServiceTest {
 	
 	@Test 
 	@Transactional
-	public void quandoBuscarPorIdQueExiste() {
-		Application application = criarApplication("127.0.0.1");
+	public void whenFindIdThatExists() {
+		Application application = createApplication("127.0.0.1");
 		
 		Optional<Application> result = applicationRepository.findById(application.getId());
 		
@@ -46,7 +46,7 @@ public class ApplicationServiceTest {
 		assertThat(result.get().getName(), equalTo("127.0.0.1"));
 	}
 	
-	private Application criarApplication(String name) {
+	private Application createApplication(String name) {
 		Random rand = new Random();
 		Application application = Application.builder()
 				.name(name)
