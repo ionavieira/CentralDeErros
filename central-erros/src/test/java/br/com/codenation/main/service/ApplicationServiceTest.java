@@ -25,7 +25,7 @@ public class ApplicationServiceTest {
 	
 	@Test 
 	@Transactional
-	public void whenFindAllApplications() {
+	public void whenFindAllReturns() {
 		Application application1 = createApplication("127.0.0.1");
 				
 		Application application2 = createApplication("189.29.10.2");
@@ -37,7 +37,7 @@ public class ApplicationServiceTest {
 	
 	@Test 
 	@Transactional
-	public void whenFindIdThatExists() {
+	public void whenFindByIdReturns() {
 		Application application = createApplication("127.0.0.1");
 		
 		Optional<Application> result = applicationRepository.findById(application.getId());

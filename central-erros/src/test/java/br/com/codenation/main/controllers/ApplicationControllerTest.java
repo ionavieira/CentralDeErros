@@ -4,6 +4,7 @@ import static org.hamcrest.Matchers.*;
 import static org.hamcrest.MatcherAssert.*;
 
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
+import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.jsonPath;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
@@ -21,6 +22,8 @@ import org.springframework.test.context.junit.jupiter.SpringExtension;
 import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.test.web.servlet.ResultActions;
 import org.springframework.transaction.annotation.Transactional;
+
+import com.google.gson.Gson;
 
 import br.com.codenation.model.Application;
 import br.com.codenation.service.ApplicationService;
@@ -93,7 +96,31 @@ public class ApplicationControllerTest {
 				.andExpect(status().is2xxSuccessful())
 				.andExpect(jsonPath("$").doesNotExist());
 	}
+	
+	@Test
+	@Transactional 
+	public void shouldBeSuccessfulWhenCreatingANewApplication() throws Exception {
+		Application application = Application.builder()
+				.id(UUID.randomUUID())
+				.name("127.0.0.1")
+				.token(String.valueOf(Math.random()))
+				.build();
 		
+		Gson gson = new Gson();
+		String jsonString = gson.toJson(application);
+		
+		ResultActions perform = mvc.perform(post("/application")
+				.contentType(MediaType.APPLICATION_JSON_VALUE)
+				.content(jsonString))
+				.andExpect(status().is2xxSuccessful());
+	}
+	
+	@Test
+	@Transactional
+	public void shouldReturnAnErrorBecauseOfWrongIdType() throws Exception {
+		
+	}
+	
 	private Application createApplication(String name) {
 		Random rand = new Random();
 		Application application = Application.builder()
